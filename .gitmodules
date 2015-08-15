@@ -1,0 +1,3 @@
+[submodule "pyramid"]
+	path = pyramid
+	url = https://github.com/pylonsproject-jp/pyramid.git

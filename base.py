@@ -14,13 +14,14 @@ def hello_world(request):
 
 
 def _login(request):
-    return render_to_response('login.pt', {}, request=request)
+    return render_to_response('login.mak', {}, request=request)
 
 
 def execute():
     from wsgiref.simple_server import make_server
     from pyramid.config import Configurator
     config = Configurator()
+    config.include('pyramid_mako')
     add_routes(config)
     app = config.make_wsgi_app()
     server = make_server('0.0.0.0', 8999, app)
@@ -35,4 +36,11 @@ def add_routes(config):
 
 
 if __name__ == '__main__':
+    import os
+    here = os.path.dirname(__file__)
+    settings = {
+        'mako.directories': [
+            os.path.abspath(os.path.join(here, 'templates')),
+        ],
+        }
     execute()

@@ -14,7 +14,10 @@ def hello_world(request):
 
 
 def _login(request):
-    return render_to_response('login.mak', {}, request=request)
+    return render_to_response(
+        'login.mak',
+        {'hoge': 'p', 'piyo': [1,2,3,4,5]},
+        request=request)
 
 
 def execute():

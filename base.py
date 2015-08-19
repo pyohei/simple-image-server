@@ -20,6 +20,10 @@ def _login(request):
         request=request)
 
 
+def menu(request):
+    return Response('%s' % (",".join(request.POST.keys())))
+
+
 def execute():
     from wsgiref.simple_server import make_server
     from pyramid.config import Configurator
@@ -36,6 +40,8 @@ def add_routes(config):
     config.add_view(hello_world, route_name='hello')
     config.add_route('login', '/login')
     config.add_view(_login, route_name='login')
+    config.add_route('menu', '/menu')
+    config.add_view(menu, route_name='menu')
 
 
 if __name__ == '__main__':

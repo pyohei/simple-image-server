@@ -3,6 +3,22 @@
     <title>hoge</title>
   </head>
   <body>
+    <form name="login" method="post" action="/menu">
+  	<div>ぴよっくま</div>
+	<div>
+	  <div>
+	    ユーザー名
+	    <input type="text" name="username" size="10">
+      </div>
+      <div>
+        パスワード
+        <input type="password" name="userpass" size="10">
+      </div>
+	</div>
+	<input type="submit">
+
+    </form>
+
     <b>hello login</b>
     <p>${hoge}</p>
     % for n in piyo:

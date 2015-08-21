@@ -29,11 +29,15 @@ def _disp_menu(request):
     params = request.POST
     username = params['username']
     userpass = params['userpass']
-#    if __valid_passwd(request
-#    if not __has_cookie(request.cookies):
-#        return _disp_login(request)
-    return Response('{0}'.format(username))
-#    responce.set_cookie('sid', COOKIE)
+    if __can_login(username, userpass):
+        response = Response('{0}'.format(username))
+        response.set_cookie('sid', 'piyopiyo')
+        return response
+    return _disp_login(request)
+
+
+def __can_login(username, userpass):
+    return username == 'piyo' and userpass == 'kumapiyo'
 
 
 def __has_cookie(cookie):

@@ -9,6 +9,7 @@ from pyramid.response import Response
 from pyramid.renderers import render_to_response
 
 PASSWD = 'hogehoge'
+COOKIE = 'mycookie'
 
 
 def hello_world(request):
@@ -25,7 +26,18 @@ def _disp_login(request):
 
 
 def _disp_menu(request):
-    return Response('%s' % (",".join(request.cookies)))
+    params = request.POST
+    username = params['username']
+    userpass = params['userpass']
+#    if __valid_passwd(request
+#    if not __has_cookie(request.cookies):
+#        return _disp_login(request)
+    return Response('{0}'.format(username))
+#    responce.set_cookie('sid', COOKIE)
+
+
+def __has_cookie(cookie):
+    pass
 
 
 def execute():

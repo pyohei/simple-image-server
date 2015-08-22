@@ -1,10 +1,14 @@
 <html>
   <head>
+    <link rel="stylesheet" type="text/css" href="/static/css/login.css">
     <title>hoge</title>
   </head>
   <body>
-    <form name="login" method="post" action="/menu">
-  	<div>ぴよっくま</div>
+    <h1>ぴよっくま</h1>
+    % if error:
+        <font color="#ff0000"><b>${error}</b></font>
+    % endif
+    <form name="login" method="post" action="/images">
 	<div>
 	  <div>
 	    ユーザー名
@@ -15,7 +19,7 @@
         <input type="password" name="userpass" size="10">
       </div>
 	</div>
-	<input type="submit">
+	<input type="submit" value="ログイン">
 
     </form>
 

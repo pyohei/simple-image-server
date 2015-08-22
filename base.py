@@ -16,24 +16,37 @@ def hello_world(request):
     return Response('Hello %(name)s!' % request.matchdict)
 
 
-def _disp_login(request):
-    responce = render_to_response(
+def _disp_login(request, error='', del_cookies=[]):
+    params = {}
+    params['error'] = error
+    params['hoge'] = 'hoge'
+    params['piyo'] = [1, 2, 3, 4]
+    response = render_to_response(
         'login.mak',
-        {'hoge': 'p', 'piyo': [1, 2, 3, 4, 5]},
+        params,
         request=request)
-    responce.set_cookie('hoge', 'piyopiyo')
-    return responce
+    if del_cookies:
+        for c in del_cookies:
+            response.delete_cookie(c)
+    return response
 
 
-def _disp_menu(request):
+def _disp_images(request):
     params = request.POST
     username = params['username']
     userpass = params['userpass']
     if __can_login(username, userpass):
-        response = Response('{0}'.format(username))
+        response = render_to_response(
+            'images.mak',
+            {},
+            request=request)
         response.set_cookie('sid', 'piyopiyo')
         return response
-    return _disp_login(request)
+    return _disp_login(request, u'ログインに失敗しました。')
+
+
+def _logout(request):
+    return _disp_login(request, del_cookies=['sid'])
 
 
 def __can_login(username, userpass):
@@ -60,8 +73,11 @@ def add_routes(config):
     config.add_view(hello_world, route_name='hello')
     config.add_route('login', '/login')
     config.add_view(_disp_login, route_name='login')
-    config.add_route('menu', '/menu')
-    config.add_view(_disp_menu, route_name='menu')
+    config.add_route('images', '/images')
+    config.add_view(_disp_images, route_name='images')
+    config.add_route('logout', '/logout')
+    config.add_view(_logout, route_name='logout')
+    config.add_static_view('static', 'static')
 
 
 if __name__ == '__main__':

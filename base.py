@@ -5,6 +5,7 @@
 This module is base for http operation.
 """
 
+import csv
 from pyramid.response import Response
 from pyramid.renderers import render_to_response
 
@@ -36,9 +37,12 @@ def _disp_images(request):
     username = params['username']
     userpass = params['userpass']
     if __can_login(username, userpass):
+        image_paths = ['sample/bar/1.jpg']
+        params = {}
+        params['images'] = image_paths
         response = render_to_response(
             'images.mak',
-            {},
+            params,
             request=request)
         response.set_cookie('sid', 'piyopiyo')
         return response

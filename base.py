@@ -11,6 +11,7 @@ from pyramid.renderers import render_to_response
 
 PASSWD = 'hogehoge'
 COOKIE = 'mycookie'
+MAPPINGS = 'mapping/mapping.txt'
 
 
 def hello_world(request):
@@ -37,7 +38,11 @@ def _disp_images(request):
     username = params['username']
     userpass = params['userpass']
     if __can_login(username, userpass):
-        image_paths = ['sample/bar/1.jpg']
+        image_paths = []
+        with open(MAPPINGS, 'rb') as f:
+            reader = csv.reader(f)
+            for r in reader:
+                image_paths.append(r[1])
         params = {}
         params['images'] = image_paths
         response = render_to_response(

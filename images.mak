@@ -11,7 +11,7 @@
 	<div id="links" class="kumaimages">
 	% for i in images:
 	  <a href="/static/images/${i}">
-		<img src="/static/images/${i}" width="20%" height="20%" />
+		<img src="/static/images/${i}" width="10%" height="10%" />
 	  </a>
 	% endfor
 	</div>

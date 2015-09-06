@@ -10,3 +10,4 @@ lib/*
 
 target/
 tmp/*
+static/images/*

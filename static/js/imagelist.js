@@ -1,0 +1,3 @@
+$(function() {
+  $('#kumalinks a').tosrus();
+});

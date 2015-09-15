@@ -35,23 +35,29 @@ def _disp_login(request, error='', del_cookies=[]):
 
 def _disp_images(request):
     params = request.POST
-    username = params['username']
-    userpass = params['userpass']
-    if __can_login(username, userpass):
-        image_paths = []
-        with open(MAPPINGS, 'rb') as f:
-            reader = csv.reader(f)
-            for r in reader:
-                image_paths.append(r[1])
-        params = {}
-        params['images'] = image_paths
-        response = render_to_response(
-            'images.mak',
-            params,
-            request=request)
-        response.set_cookie('sid', 'piyopiyo')
-        return response
-    return _disp_login(request, u'ログインに失敗しました。')
+    is_login = False
+    if 'username' in params and 'userpass' in params:
+        username = params['username']
+        userpass = params['userpass']
+        is_login = __can_login(username, userpass)
+    if 'sid' in request.cookies:
+        sid = request.cookies['sid']
+        is_login = __has_valid_cookie(sid)
+    if not is_login:
+        return _disp_login(request, u'Failur in login!!!')
+    image_paths = []
+    with open(MAPPINGS, 'rb') as f:
+        reader = csv.reader(f)
+        for r in reader:
+            image_paths.append(r[1])
+    params = {}
+    params['images'] = image_paths
+    response = render_to_response(
+        'images.mak',
+        params,
+        request=request)
+    response.set_cookie('sid', 'piyopiyo')
+    return response
 
 
 def _logout(request):
@@ -62,11 +68,12 @@ def __can_login(username, userpass):
     return username == 'piyo' and userpass == 'kumapiyo'
 
 
-def __has_cookie(cookie):
-    pass
+def __has_valid_cookie(cookie):
+    return cookie == 'piyopiyo'
 
 
 def execute():
+    """ Execute this application."""
     from wsgiref.simple_server import make_server
     from pyramid.config import Configurator
     config = Configurator()
@@ -78,6 +85,7 @@ def execute():
 
 
 def add_routes(config):
+    """ Add Root information."""
     config.add_route('hello', '/hello/{name}')
     config.add_view(hello_world, route_name='hello')
     config.add_route('login', '/login')

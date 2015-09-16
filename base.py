@@ -15,6 +15,7 @@ MAPPINGS = 'mapping/mapping.txt'
 
 
 def hello_world(request):
+    """ Test module(delete in releasing.)"""
     return Response('Hello %(name)s!' % request.matchdict)
 
 
@@ -72,19 +73,7 @@ def __has_valid_cookie(cookie):
     return cookie == 'piyopiyo'
 
 
-def execute():
-    """ Execute this application."""
-    from wsgiref.simple_server import make_server
-    from pyramid.config import Configurator
-    config = Configurator()
-    config.include('pyramid_mako')
-    add_routes(config)
-    app = config.make_wsgi_app()
-    server = make_server('0.0.0.0', 8999, app)
-    server.serve_forever()
-
-
-def add_routes(config):
+def __add_routes(config):
     """ Add Root information."""
     config.add_route('hello', '/hello/{name}')
     config.add_view(hello_world, route_name='hello')
@@ -95,6 +84,18 @@ def add_routes(config):
     config.add_route('logout', '/logout')
     config.add_view(_logout, route_name='logout')
     config.add_static_view('static', 'static')
+
+
+def execute():
+    """ Execute this application."""
+    from wsgiref.simple_server import make_server
+    from pyramid.config import Configurator
+    config = Configurator()
+    config.include('pyramid_mako')
+    __add_routes(config)
+    app = config.make_wsgi_app()
+    server = make_server('0.0.0.0', 8999, app)
+    server.serve_forever()
 
 
 if __name__ == '__main__':

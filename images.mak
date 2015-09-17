@@ -1,8 +1,11 @@
 <html>
   <head>
-    <title>hoge</title>
+    <title>ぴよくま一覧</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=10.0, user-scalable=yes">
+    <meta name="apple-mobile-web-app-capable" content="no">
+    <link media="only screen and (max-device-width:480px)" rel="stylesheet" type="text/css" href="/static/css/image_smart.css">
+    <link media="screen and (min-device-width:481px)" rel="stylesheet" type="text/css" href="/static/css/image.css">
     <link rel="stylesheet" type="text/css" href="/static/js/tosrus/css/jquery.tosrus.all.css" />
-    <link rel="stylesheet" type="text/css" href="/static/css/image.css" />
   </head>
   <body>
   <!-- <script type="text/javascript" src="/static/js/tosrus/jquery.js"></script> -->

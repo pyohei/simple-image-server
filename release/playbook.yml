@@ -1,0 +1,70 @@
+---
+- hosts: all
+  sudo: yes
+  remote_user: ubuntu
+  tasks:
+    - name: Update all packages
+      apt: update_cache=yes
+
+    - name: Install vim
+      apt: name=vim state=present
+
+#    - name: Install Apache2
+#      apt: pkg=apache2 state=installed
+
+#    - name: Start Apache2
+#      service: name=apache2 state=running enabled=yes
+
+    - name: Install Git
+      apt: pkg=git state=installed
+      
+    - name: Install ufw
+      apt: pkg=ufw state=installed
+      tags: ufw
+
+    - name: Enable ufw
+      ufw: state=reset
+
+    - name: Deny ufw from  all access
+      ufw: policy=deny direction=incoming
+      tags: ufw
+
+#    - name: Allow from ssh connection
+#      ufw: policy=allow port=22
+#      tags: ufw
+
+    - name: Allow from HTTP request
+      ufw: policy=allow port=80
+      tags: ufw
+
+    - name: Enable ufw
+      ufw: state=enabled
+
+    - name: Install pip
+      apt: pkg=python-pip state=installed
+
+#    - name: Install mod_wsgi
+#      apt: pkg=libapache2-mod-wsgi state=installed
+
+#    - name: Set mod_wsgi module to Apache
+#      shell: >-
+#          touch /etc/apache2/mods-available/mod_wsgi.load &&
+#          echo 'LoadModule wsgi_module /usr/lib/apache2/modules/mod_wsgi.so'> /etc/apache2/mods-available/mod_wsgi.load
+
+#    - name: Restart Apache2
+#      service: name=apache2 state=restarted
+
+#    - name: Change Documet Root
+#      replace:
+#        dest='/etc/apache2/sites-enabled/000-default.conf'
+#        regexp='/var/www/html'
+#        replace='/var/www/web'
+
+    - name: Make web directory
+      command: mkdir -p /var/www/piyokkuma
+
+#    - name: Restart Apache2
+#      service: name=apache2 state=restarted
+
+    - name: Install pyramid
+      pip: name=pyramid

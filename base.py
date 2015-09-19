@@ -86,7 +86,7 @@ def __add_routes(config):
     config.add_view(_logout, route_name='logout')
     config.add_static_view('static', 'static')
     if RLEASE_MODE:
-        config.add_static_view('/var/www/public_html', 'image')
+        config.add_static_view('/var/www/photos', 'photos')
 
 
 def execute():

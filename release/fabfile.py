@@ -7,6 +7,13 @@ This script supply blow functions for ubuntu.
     - deployment
 
 * You need to prepare server passing TCP/22 ubuntu server.
+
+***COMMAND(Deploy)***
+ubuntu$ fab -H xx.xx.xx.xx [-i ~/.ssh/hogehoge.pem] deploy
+
+***COMMAND(Provision)***
+ubuntu$ fab -H xx.xx.xx.xx [-i ~/.ssh/hogehoge.pem] provision
+
 """
 
 from os import path
@@ -59,14 +66,6 @@ def provision():
 
 def __provision():
     local('ansible-playbook -i hosts playbook.yml -k ')
-
-
-def __mkdir(path, force=False):
-    command = 'mkdir '
-    if force:
-        command += '-p '
-    command += path
-    run(command)
 
 
 def __clone(path, submodule=False):

@@ -40,6 +40,9 @@
     - name: Make web directory
       command: mkdir -p /var/www/piyokkuma
 
+    - name: Make web directory
+      command: mkdir -p /var/www/images
+
     - name: Install pyramid
       pip: name=pyramid
 

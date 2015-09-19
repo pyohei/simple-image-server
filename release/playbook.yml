@@ -60,3 +60,7 @@
 ## 上記の後に
 ##    sudo pip upgrade zope.interface
 ## したらうまくできた。が謎だ。
+
+
+    - name: Install zope.deprecation
+      pip: name=tweepy

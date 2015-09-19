@@ -12,6 +12,7 @@ from pyramid.renderers import render_to_response
 PASSWD = 'hogehoge'
 COOKIE = 'mycookie'
 MAPPINGS = 'mapping/mapping.txt'
+RLEASE_MODE = False
 
 
 def hello_world(request):
@@ -84,6 +85,8 @@ def __add_routes(config):
     config.add_route('logout', '/logout')
     config.add_view(_logout, route_name='logout')
     config.add_static_view('static', 'static')
+    if RLEASE_MODE:
+        config.add_static_view('/var/www/public_html', 'image')
 
 
 def execute():

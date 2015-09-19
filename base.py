@@ -97,7 +97,10 @@ def execute():
     config.include('pyramid_mako')
     __add_routes(config)
     app = config.make_wsgi_app()
-    server = make_server('0.0.0.0', 8999, app)
+    if RLEASE_MODE:
+        server = make_server('0.0.0.0', 80, app)
+    else:
+        server = make_server('0.0.0.0', 8999, app)
     server.serve_forever()
 
 

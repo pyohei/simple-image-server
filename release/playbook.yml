@@ -68,3 +68,6 @@
 
     - name: Install pyramid
       pip: name=pyramid
+
+    - name: Install pyramid_mako
+      pip: name=pyramid_mako

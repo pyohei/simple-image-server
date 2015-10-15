@@ -9,5 +9,5 @@ Before your using, You need below python 3rd parties.
 * pyramid
 * pyramid_mako
 
-## LISENCE
-MIT
+## LICENSE
+* [MIT](https://github.com/pyohei/image-viewer/master/LICENSE)

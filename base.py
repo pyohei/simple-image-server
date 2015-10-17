@@ -15,11 +15,6 @@ MAPPINGS = 'mapping/mapping.txt'
 RLEASE_MODE = False
 
 
-def hello_world(request):
-    """ Test module(delete in releasing.)"""
-    return Response('Hello %(name)s!' % request.matchdict)
-
-
 def _disp_login(request, error='', del_cookies=[]):
     params = {}
     params['error'] = error
@@ -76,8 +71,6 @@ def __has_valid_cookie(cookie):
 
 def __add_routes(config):
     """ Add Root information."""
-    config.add_route('hello', '/hello/{name}')
-    config.add_view(hello_world, route_name='hello')
     config.add_route('login', '/login')
     config.add_view(_disp_login, route_name='login')
     config.add_route('images', '/images')

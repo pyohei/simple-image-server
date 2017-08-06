@@ -11,3 +11,5 @@ lib/*
 target/
 tmp/*
 static/images/*
+
+.DS_Store

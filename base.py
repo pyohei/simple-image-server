@@ -6,7 +6,6 @@ This module is base for http operation.
 """
 
 import csv
-from pyramid.response import Response
 from pyramid.renderers import render_to_response
 
 PASSWD = 'hogehoge'

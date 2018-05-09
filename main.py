@@ -42,7 +42,7 @@ def _disp_images(request):
     if not is_login:
         return _disp_login(request, u'Failur in login!!!')
     image_paths = []
-    with open(MAPPINGS, 'rb') as f:
+    with open(MAPPINGS, 'r') as f:
         reader = csv.reader(f)
         for r in reader:
             image_paths.append(r[1])
@@ -90,8 +90,10 @@ def execute():
     __add_routes(config)
     app = config.make_wsgi_app()
     if RLEASE_MODE:
+        print('0.0.0.0:80')
         server = make_server('0.0.0.0', 80, app)
     else:
+        print('0.0.0.0:8999')
         server = make_server('0.0.0.0', 8999, app)
     server.serve_forever()
 

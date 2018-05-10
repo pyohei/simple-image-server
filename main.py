@@ -1,5 +1,3 @@
-# coding: utf8
-
 """HTTP Base interface.
 
 This module is base for http operation.
@@ -11,7 +9,7 @@ from pyramid.renderers import render_to_response
 USER = 'user'
 PASSWD = 'password'
 COOKIE = 'mycookie'
-MAPPINGS = 'mapping/mapping.txt'
+MAPPINGS = 'sample/mapping.txt'
 RLEASE_MODE = False
 
 

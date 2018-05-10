@@ -10,7 +10,6 @@ USER = 'user'
 PASSWD = 'password'
 COOKIE = 'mycookie'
 MAPPINGS = 'sample/mapping.txt'
-RLEASE_MODE = False
 
 
 def _disp_login(request, error='', del_cookies=[]):
@@ -76,8 +75,6 @@ def __add_routes(config):
     config.add_route('logout', '/logout')
     config.add_view(_logout, route_name='logout')
     config.add_static_view('static', 'static')
-    if RLEASE_MODE:
-        config.add_static_view('photos', '/var/www/photos')
 
 
 def execute():
@@ -88,12 +85,8 @@ def execute():
     config.include('pyramid_mako')
     __add_routes(config)
     app = config.make_wsgi_app()
-    if RLEASE_MODE:
-        print('0.0.0.0:80')
-        server = make_server('0.0.0.0', 80, app)
-    else:
-        print('0.0.0.0:8999')
-        server = make_server('0.0.0.0', 8999, app)
+    print('0.0.0.0:8999')
+    server = make_server('0.0.0.0', 8999, app)
     server.serve_forever()
 
 

@@ -8,7 +8,8 @@ This module is base for http operation.
 import csv
 from pyramid.renderers import render_to_response
 
-PASSWD = 'hogehoge'
+USER = 'user'
+PASSWD = 'password'
 COOKIE = 'mycookie'
 MAPPINGS = 'mapping/mapping.txt'
 RLEASE_MODE = False
@@ -52,7 +53,7 @@ def _disp_images(request):
         'images.mak',
         params,
         request=request)
-    response.set_cookie('sid', 'piyopiyo')
+    response.set_cookie('sid', 'iv')
     return response
 
 
@@ -61,11 +62,11 @@ def _logout(request):
 
 
 def __can_login(username, userpass):
-    return username == 'piyo' and userpass == 'kumapiyo'
+    return username == USER and userpass == PASSWD
 
 
 def __has_valid_cookie(cookie):
-    return cookie == 'piyopiyo'
+    return cookie == 'iv'
 
 
 def __add_routes(config):

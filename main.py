@@ -9,7 +9,6 @@ from pyramid.renderers import render_to_response
 USER = 'user'
 PASSWD = 'password'
 COOKIE = 'mycookie'
-MAPPINGS = 'sample/mapping.txt'
 
 
 def _disp_login(request, error='', del_cookies=[]):
@@ -40,10 +39,6 @@ def _disp_images(request):
     if not is_login:
         return _disp_login(request, u'Failur in login!!!')
     image_paths = []
-    with open(MAPPINGS, 'r') as f:
-        reader = csv.reader(f)
-        for r in reader:
-            image_paths.append(r[1])
     params = {}
     params['images'] = image_paths
     response = render_to_response(
@@ -92,10 +87,18 @@ def execute():
 
 if __name__ == '__main__':
     import os
+    import argparse
+    p = argparse.ArgumentParser(description='Simple image viewer.')
+    p_h = 'Public image directory. If you want to see sample, input `images/sample`'
+    p.add_argument('public_dir', help=p_h)
+    args = p.parse_args()
+    pd = str(args.public_dir)
+    print(os.path.abspath(pd))
+
     here = os.path.dirname(__file__)
     settings = {
         'mako.directories': [
             os.path.abspath(os.path.join(here, 'templates')),
         ],
         }
-    execute()
+    execute(pd)

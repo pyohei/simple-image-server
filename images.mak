@@ -32,8 +32,8 @@
   <h1>よんくま一覧</h1>
   <div id="kumalinks" class="kumaimages example thumbs">
     % for i in images:
-      <a href="/static/images/${i}">
-        <img src="/static/images/${i}" width="8.5%" height="16%" />
+      <a href="${i}">
+        <img src="${i}" width="8.5%" height="16%" />
       </a>
     % endfor
   </div>

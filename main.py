@@ -35,12 +35,21 @@ def _disp_images(request):
         username = params['username']
         userpass = params['userpass']
         is_login = __can_login(username, userpass)
+        print('hoge')
     if 'sid' in request.cookies:
         sid = request.cookies['sid']
         is_login = __has_valid_cookie(sid)
+        print('hogew')
     if not is_login:
         return _disp_login(request, u'Failur in login!!!')
     image_paths = []
+    for r, d, fs in os.walk(PUBLIC_DIR):
+        for f in fs:
+            _p = os.path.join(r, f)
+            
+            print(_p)
+            print(os.path.join('static', _p.lstrip(PUBLIC_DIR)))
+            image_paths.append(os.path.join('static', _p.lstrip(PUBLIC_DIR)))
     params = {}
     params['images'] = image_paths
     response = render_to_response(
@@ -71,7 +80,8 @@ def __add_routes(config):
     config.add_view(_disp_images, route_name='images')
     config.add_route('logout', '/logout')
     config.add_view(_logout, route_name='logout')
-    config.add_static_view('static', 'static')
+    config.add_static_view('static', PUBLIC_DIR)
+    #config.add_static_view('static', 'static')
 
 
 def execute():
@@ -94,6 +104,7 @@ if __name__ == '__main__':
     p.add_argument('public_dir', help=p_h)
     args = p.parse_args()
     PUBLIC_DIR = os.path.abspath(args.public_dir)
+    print(PUBLIC_DIR)
     if not os.path.isdir(PUBLIC_DIR):
         print('public_dir doesn\'t exist!')
         quit()

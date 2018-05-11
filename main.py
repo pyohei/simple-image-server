@@ -4,12 +4,14 @@ This module is base for http operation.
 """
 
 import csv
+import os
 from pyramid.renderers import render_to_response
 
 USER = 'user'
 PASSWD = 'password'
 COOKIE = 'mycookie'
 
+PUBLIC_DIR = None
 
 def _disp_login(request, error='', del_cookies=[]):
     params = {}
@@ -86,14 +88,15 @@ def execute():
 
 
 if __name__ == '__main__':
-    import os
     import argparse
     p = argparse.ArgumentParser(description='Simple image viewer.')
     p_h = 'Public image directory. If you want to see sample, input `images/sample`'
     p.add_argument('public_dir', help=p_h)
     args = p.parse_args()
-    pd = str(args.public_dir)
-    print(os.path.abspath(pd))
+    PUBLIC_DIR = os.path.abspath(args.public_dir)
+    if not os.path.isdir(PUBLIC_DIR):
+        print('public_dir doesn\'t exist!')
+        quit()
 
     here = os.path.dirname(__file__)
     settings = {
@@ -101,4 +104,4 @@ if __name__ == '__main__':
             os.path.abspath(os.path.join(here, 'templates')),
         ],
         }
-    execute(pd)
+    execute()

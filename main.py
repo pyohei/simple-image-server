@@ -46,10 +46,8 @@ def _disp_images(request):
     for r, d, fs in os.walk(PUBLIC_DIR):
         for f in fs:
             _p = os.path.join(r, f)
-            
-            print(_p)
-            print(os.path.join('static', _p.lstrip(PUBLIC_DIR)))
-            image_paths.append(os.path.join('static', _p.lstrip(PUBLIC_DIR)))
+            _f = _p.replace(PUBLIC_DIR, '').lstrip('/')
+            image_paths.append(os.path.join('static', _f))
     params = {}
     params['images'] = image_paths
     response = render_to_response(

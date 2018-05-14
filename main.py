@@ -34,11 +34,11 @@ def _disp_images(request):
     if 'username' in params and 'userpass' in params:
         username = params['username']
         userpass = params['userpass']
-        is_login = __can_login(username, userpass)
+        is_login = _can_login(username, userpass)
         print('hoge')
     if 'sid' in request.cookies:
         sid = request.cookies['sid']
-        is_login = __has_valid_cookie(sid)
+        is_login = _has_valid_cookie(sid)
         print('hogew')
     if not is_login:
         return _disp_login(request, u'Failur in login!!!')
@@ -62,15 +62,15 @@ def _logout(request):
     return _disp_login(request, del_cookies=['sid'])
 
 
-def __can_login(username, userpass):
+def _can_login(username, userpass):
     return username == USER and userpass == PASSWD
 
 
-def __has_valid_cookie(cookie):
+def _has_valid_cookie(cookie):
     return cookie == 'iv'
 
 
-def __add_routes(config):
+def _add_routes(config):
     """ Add Root information."""
     config.add_route('login', '/login')
     config.add_view(_disp_login, route_name='login')
@@ -88,7 +88,7 @@ def execute():
     from pyramid.config import Configurator
     config = Configurator()
     config.include('pyramid_mako')
-    __add_routes(config)
+    _add_routes(config)
     app = config.make_wsgi_app()
     print('0.0.0.0:8999')
     server = make_server('0.0.0.0', 8999, app)

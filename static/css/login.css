@@ -6,6 +6,10 @@ h1 {
   text-align: center;
 }
 
+.logincontents {
+  margin: 10px;
+}
+
 .copyright {
   text-align: center;
   padding: 10px, 0px, 10px, 0px;

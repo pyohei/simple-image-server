@@ -47,7 +47,7 @@ def _disp_images(request):
         for f in fs:
             _p = os.path.join(r, f)
             _f = _p.replace(PUBLIC_DIR, '').lstrip('/')
-            image_paths.append(os.path.join('static', _f))
+            image_paths.append(os.path.join('images', _f))
     params = {}
     params['images'] = image_paths
     response = render_to_response(
@@ -78,8 +78,8 @@ def _add_routes(config):
     config.add_view(_disp_images, route_name='images')
     config.add_route('logout', '/logout')
     config.add_view(_logout, route_name='logout')
-    config.add_static_view('static', PUBLIC_DIR)
-    #config.add_static_view('static', 'static')
+    config.add_static_view('static', 'static')
+    config.add_static_view('images', PUBLIC_DIR)
 
 
 def execute():

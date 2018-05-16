@@ -35,12 +35,20 @@ pip install -r requirements.txt
 
 ### PREPARE
 
-Before executing, you prepare 
+Before executing, you prepare image folder which you will use in this script.  
 
 ### EXECUTE
 
+You can execute the below command (using the upper directory name).
+
 ```bash
-python main.py
+python main.py `your image file directory`
+```
+
+If you want to execute sample, 
+
+```bash
+python main.py sample
 ```
 
 ## LICENSE

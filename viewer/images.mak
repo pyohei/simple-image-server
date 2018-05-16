@@ -1,6 +1,6 @@
 <html>
   <head>
-    <title>ぴよくま一覧</title>
+    <title>Image List</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=10.0, user-scalable=yes">
     <meta name="apple-mobile-web-app-capable" content="no">
     <link media="only screen and (max-device-width:480px)" rel="stylesheet" type="text/css" href="/static/css/image_smart.css">
@@ -29,7 +29,7 @@
     })();
   </script>
 
-  <h1>よんくま一覧</h1>
+  <h1>Photo List</h1>
   <div id="kumalinks" class="kumaimages example thumbs">
     % for i in images:
       <a href="${i}">

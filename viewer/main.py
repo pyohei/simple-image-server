@@ -1,7 +1,4 @@
-"""HTTP Base interface.
-
-This module is base for http operation.
-"""
+"""Simple imager server"""
 
 import csv
 import os
@@ -16,7 +13,6 @@ PUBLIC_DIR = None
 def _disp_login(request, error='', del_cookies=[]):
     params = {}
     params['error'] = error
-    params['hoge'] = 'hoge'
     response = render_to_response(
         'login.mak',
         params,
@@ -34,11 +30,9 @@ def _disp_images(request):
         username = params['username']
         userpass = params['userpass']
         is_login = _can_login(username, userpass)
-        print('hoge')
     if 'sid' in request.cookies:
         sid = request.cookies['sid']
         is_login = _has_valid_cookie(sid)
-        print('hogew')
     if not is_login:
         return _disp_login(request, u'Failur in login!!!')
     image_paths = []

@@ -1,4 +1,4 @@
-# Simple Image File Viewer
+# Simple Image File Server
 
 ## ABOUT 
 
@@ -50,6 +50,11 @@ If you want to execute sample,
 ```bash
 python main.py sample
 ```
+
+## Plugin
+
+I'm using jQuery plugin of [jQuery.TosRUs](http://tosrus.frebsite.nl/).  
+Thanks!  
 
 ## LICENSE
 

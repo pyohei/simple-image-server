@@ -17,7 +17,6 @@ def _disp_login(request, error='', del_cookies=[]):
     params = {}
     params['error'] = error
     params['hoge'] = 'hoge'
-    params['piyo'] = [1, 2, 3, 4]
     response = render_to_response(
         'login.mak',
         params,

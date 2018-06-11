@@ -4,13 +4,14 @@ import csv
 import os
 from pyramid.renderers import render_to_response
 
+PORT = 8999
 USER = 'user'
 PASSWD = 'password'
-COOKIE = 'mycookie'
 
 PUBLIC_DIR = None
 
 def _disp_login(request, error='', del_cookies=[]):
+    """Display login interface."""
     params = {}
     params['error'] = error
     response = render_to_response(
@@ -24,6 +25,7 @@ def _disp_login(request, error='', del_cookies=[]):
 
 
 def _disp_images(request):
+    """Display images."""
     params = request.POST
     is_login = False
     if 'username' in params and 'userpass' in params:
@@ -52,19 +54,22 @@ def _disp_images(request):
 
 
 def _logout(request):
+    """Delete cookie for logout."""
     return _disp_login(request, del_cookies=['sid'])
 
 
 def _can_login(username, userpass):
+    """Check user name and password."""
     return username == USER and userpass == PASSWD
 
 
 def _has_valid_cookie(cookie):
+    """Check cookie value."""
     return cookie == 'iv'
 
 
 def _add_routes(config):
-    """ Add Root information."""
+    """Add Root information."""
     config.add_route('login', '/login')
     config.add_view(_disp_login, route_name='login')
     config.add_route('images', '/images')
@@ -76,15 +81,15 @@ def _add_routes(config):
 
 
 def execute():
-    """ Execute this application."""
+    """Execute this application."""
     from wsgiref.simple_server import make_server
     from pyramid.config import Configurator
     config = Configurator()
     config.include('pyramid_mako')
     _add_routes(config)
     app = config.make_wsgi_app()
-    print('0.0.0.0:8999')
-    server = make_server('0.0.0.0', 8999, app)
+    print('Access to http://localhost:{}/login'.format(PORT))
+    server = make_server('0.0.0.0', PORT, app)
     server.serve_forever()
 
 
@@ -95,7 +100,6 @@ if __name__ == '__main__':
     p.add_argument('public_dir', help=p_h)
     args = p.parse_args()
     PUBLIC_DIR = os.path.abspath(args.public_dir)
-    print(PUBLIC_DIR)
     if not os.path.isdir(PUBLIC_DIR):
         print('public_dir doesn\'t exist!')
         quit()

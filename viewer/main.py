@@ -1,5 +1,4 @@
 """Simple imager server"""
-
 import csv
 import os
 from pyramid.renderers import render_to_response

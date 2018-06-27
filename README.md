@@ -15,7 +15,7 @@ You can manage and share your image files easily.
 
 ```bash
 git clone https://github.com/pyohei/image-viewer.git
-cd image-viewer
+cd simple-image-server
 ```
 
 If you want to activate virtualenv, type the below sentence.  
@@ -42,7 +42,7 @@ Before executing, you prepare image folder which you will use in this script.
 You can execute the below command (using the upper directory name).
 
 ```bash
-python main.py `your image file directory`
+python servermain.py `your image file directory`
 ```
 
 If you want to execute sample, 

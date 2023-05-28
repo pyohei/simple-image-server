@@ -15,3 +15,4 @@ static/images/*
 .DS_Store
 venv2
 venv3
+venv

@@ -4,8 +4,8 @@ import os
 from pyramid.renderers import render_to_response
 
 PORT = 8999
-USER = 'user'
-PASSWD = 'password'
+USER = os.environ.get('SIS_USER')
+PASSWD = os.environ.get('SIS_PASSWORD')
 
 PUBLIC_DIR = None
 
